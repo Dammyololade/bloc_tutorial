@@ -1,0 +1,23 @@
+{
+    "name": "flutterbloctutorial",
+    "short_name": "flutterbloctutorial",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "A flutter application to showcase the use of bloc architecture, engraved at the heart of this project is developing scalable, testable application using the flutter bloc architecture",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
