@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> with UiKits {
                       borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
                     child: UITextFormField(
-                      hint: "Phone no/ Email",
+                      hint: "Email",
                       hintColor: Colors.white,
                       border: Border(),
                     ),
