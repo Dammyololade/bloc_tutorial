@@ -1,6 +1,13 @@
-# flutterbloctutorial
+# Bloc Tutorial
 
 A flutter application to showcase the use of bloc architecture, engraved at the heart of this project is developing scalable, testable application using the flutter bloc architecture
+
+<div style="text-align: center"><table><tr>
+  <td style="text-align: center">
+  <a href="https://raw.githubusercontent.com/Dammyololade/bloc_tutorial/master/images/landing.jpeg">
+    <img src="https://raw.githubusercontent.com/Dammyololade/bloc_tutorial/master/images/landing.jpeg" width="200"/></a>
+</td>
+</tr></table></div>
 
 ## Getting Started
 
