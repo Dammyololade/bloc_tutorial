@@ -1,4 +1,4 @@
-# Bloc Tutorial
+# Bloc Tutorial Example
 
 A flutter application to showcase the use of bloc architecture, engraved at the heart of this project is developing scalable, testable application using the flutter bloc architecture
 
