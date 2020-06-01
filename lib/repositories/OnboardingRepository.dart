@@ -24,4 +24,8 @@ class OnBoardingRepository {
       return Future.error(error);
     }
   }
+
+  Future<LoginModel> registerUser(String email, String password, String firstName, String lastname) async {
+
+  }
 }

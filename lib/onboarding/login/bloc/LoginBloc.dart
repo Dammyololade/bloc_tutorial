@@ -32,7 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginState.processing();
     try {
       var response = await repository.loginUser(email, password);
-      Navigator.of(context).pushReplacementNamed(RouteManager.home);
+      //Navigator.of(context).pushReplacementNamed(RouteManager.home);
       yield LoginState.success(model: response);
     } catch(error) {
       if(error is ApiError) {
