@@ -24,7 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   code_brew:
-    path: ../code_brew
+    git:
+      url: git://github.com/novugrid/code_brew.git
+      branch: master
   flutter_bloc: ^4.0.0
   super_enum: ^0.4.2
 
