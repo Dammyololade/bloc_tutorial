@@ -1,44 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:code_brew/code_brew.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterbloctutorial/RouteManager.dart';
-import 'package:flutterbloctutorial/onboarding/login/bloc/LoginBloc.dart';
-import 'package:flutterbloctutorial/onboarding/login/bloc/login_state.dart';
-import 'package:flutterbloctutorial/onboarding/login/bloc/login_event.dart';
-import 'package:flutterbloctutorial/onboarding/register/register_screen.dart';
+import 'package:flutterbloctutorial/onboarding/register/bloc/RegisterBloc.dart';
+import 'package:flutterbloctutorial/onboarding/register/bloc/register_event.dart';
+import 'package:flutterbloctutorial/onboarding/register/bloc/register_state.dart';
 
-/// description:
-/// project: flutter_bloc_tutorial
-/// @package: onboarding
-/// @author: dammyololade
-/// created on: 30/05/2020
-
-class LoginScreen extends StatefulWidget {
+class registerScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _registerScreenState createState() => _registerScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> with UiKits {
-  LoginBloc loginBloc;
+class _registerScreenState extends State<registerScreen> {
+  RegisterBloc registerBloc;
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  var _emailController = TextEditingController();
-  var _passwordController = TextEditingController();
+  var _email = TextEditingController();
+  var _password = TextEditingController();
+  var _firstName = TextEditingController();
+  var _lastName = TextEditingController();
 
   @override
   void initState() {
-    loginBloc = BlocProvider.of<LoginBloc>(context);
-    loginBloc.context = context;
+    registerBloc = BlocProvider.of<RegisterBloc>(context);
+    registerBloc.context = context;
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
-      body: BlocListener<LoginBloc, LoginState>(
-        listener: (BuildContext context, LoginState state) {
-          if (state is LoginError) {
+      body: BlocListener<RegisterBloc, RegisterState>(
+        listener: (BuildContext context, RegisterState state) {
+          if (state is RegisterError) {
             scaffoldKey.currentState
                 .showSnackBar(SnackBar(content: Text("${state.errorMessage}")));
           }
@@ -79,15 +72,15 @@ class _LoginScreenState extends State<LoginScreen> with UiKits {
                   ],
                 ),
               ),
-              Height(50),
+              SizedBox(height: 50,),
               Text(
-                "ACCOUNT LOGIN",
+                "REGISTRATION DETAILS",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               ),
-              Height(30),
+              SizedBox(height: 50,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -98,44 +91,56 @@ class _LoginScreenState extends State<LoginScreen> with UiKits {
                           color: Theme.of(context).primaryColorDark,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: UITextFormField(
-                        controller: _emailController,
-                        hint: "Email",
+                        controller: _firstName,
+                        hint: "First Name",
                         hintColor: Colors.white,
                         border: Border(),
                       ),
                     ),
-                    Height(20),
+                    SizedBox(height: 20,),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColorDark,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: UITextFormField(
-                        controller: _passwordController,
+                        controller: _lastName,
+                        hint: "Last name",
+                        hintColor: Colors.white,
+                        border: Border(),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorDark,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: UITextFormField(
+                        controller: _email,
+                        hint: "Email",
+                        hintColor: Colors.white,
+                        border: Border(),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorDark,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: UITextFormField(
+                        controller: _password,
                         hint: "Password",
                         hintColor: Colors.white,
                         border: Border(),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white54),
-                          )
-                        ],
-                      ),
-                    ),
-                    Height(15),
-                    BlocBuilder<LoginBloc, LoginState>(
-                      bloc: loginBloc,
-                      builder: (BuildContext context, LoginState state) {
-                        if (state is LoginError) {
+                    SizedBox(height: 15,),
+                    BlocBuilder<RegisterBloc, RegisterState>(
+                      bloc: registerBloc,
+                      builder: (BuildContext context, RegisterState state) {
+                        if (state is RegisterError) {
                           return SizedBox();
                         }
                         if (state is Processing) {
@@ -146,35 +151,25 @@ class _LoginScreenState extends State<LoginScreen> with UiKits {
 
                         return RaisedButton(
                           onPressed: () {
-                            loginBloc.add(LoginEvent.loginUser(
-                                email: _emailController.text,
-                                password: _passwordController.text));
+                            registerBloc.add(RegisterEvent.registerUser(
+                                firstName: _firstName.text,
+                                lastName: _lastName.text,
+                                email: _email.text,
+                                password: _password.text));
                           },
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              BorderRadius.all(Radius.circular(10))),
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 70),
-                          child: Text("LOGIN",
+                          child: Text("REGISTER",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context).primaryColorDark)),
                         );
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: FlatButton(onPressed: () {
-                        register: registerScreen();
-                        routes: RouteManager.routes;
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => registerScreen()));
-                      }, child: 
-                      Text("New User? Register",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white70)),)
-                    )
                   ],
                 ),
               )
@@ -185,3 +180,4 @@ class _LoginScreenState extends State<LoginScreen> with UiKits {
     );
   }
 }
+
