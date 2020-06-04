@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterbloctutorial/RouteManager.dart';
 import 'package:flutterbloctutorial/onboarding/login/bloc/LoginBloc.dart';
 import 'package:flutterbloctutorial/onboarding/login/login_screen.dart';
+import 'package:flutterbloctutorial/onboarding/register/bloc/RegisterBloc.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (ct) => LoginBloc(context)
-        )
+        BlocProvider(create: (ct) => LoginBloc(context)),
+        BlocProvider(create: (ct) => RegisterBloc(context)),
       ],
       child: MaterialApp(
         title: 'Bloc Tutorial',
