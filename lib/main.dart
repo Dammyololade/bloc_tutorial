@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
         routes: RouteManager.routes,
+        initialRoute: RouteManager.dashboard,
       ),
     );
   }
